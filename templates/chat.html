@@ -14,7 +14,9 @@
   </form>
 
   <script>
-    const socket = io();
+    const socket = io({
+    transports: ["websocket", "polling"]
+    });
     const form = document.getElementById('chat-form');
     const input = document.getElementById('message');
     const messages = document.getElementById('messages');
