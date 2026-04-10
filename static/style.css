@@ -30,3 +30,6 @@ button {
   font-size: 0.9em;
   margin-bottom: 10px;
 }
+body {
+  background-color: red !important;
+}
