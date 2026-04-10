@@ -23,7 +23,7 @@ def index():
 def chat():
     if 'username' not in session:
         return redirect(url_for('index'))
-    return render_template('chat.html', username=session['username'])
+    return render_template('chat.html', username=session['username'], room=session['room'])
 
 @socketio.on('connect')
 def connect():
