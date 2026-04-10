@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO, emit, join_room, leave_room
-import eventlet
+import os
 
 app = Flask(__name__)
 app.secret_key = 'secretkey123'  # For session handling
@@ -40,5 +40,7 @@ def handle_disconnect():
     users.pop(request.sid, None)
     emit('user_list', list(users.values()), broadcast=True)
 
+
+
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
