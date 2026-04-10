@@ -15,7 +15,11 @@ users = {}  # {session_id: username}
 def index():
     if request.method == 'POST':
         username = request.form['username']
+        room = request.form['room']   # ✅ THIS WAS MISSING
+
         session['username'] = username
+        session['room'] = room        # ✅ THIS WAS MISSING
+
         return redirect(url_for('chat'))
     return render_template('index.html')
 
