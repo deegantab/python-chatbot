@@ -45,10 +45,19 @@ logging.basicConfig(level=logging.DEBUG)
 
 @socketio.on('message')
 def handle_message(data):
-    username = users.get(request.sid, 'Anonymous')
-    msg = {'username': username, 'message': data['message']}
-    emit('message', msg, broadcast=True)
+    user = users.get(request.sid)
 
+    if user:
+        username = user['username']
+        room = user['room']
+    else:
+        username = 'Anonymous'
+        room = None
+
+    emit('message', {
+        'username': username,
+        'message': data['message']
+    }, room=room)
 @socketio.on('disconnect')
 def handle_disconnect():
     users.pop(request.sid, None)
